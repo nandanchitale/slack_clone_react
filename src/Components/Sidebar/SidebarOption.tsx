@@ -6,7 +6,7 @@ interface SidebarOptionProps {
     title: string;
 }
 
-const SidebarOption: React.FC<SidebarOptionProps> = ({ Icon, title }: SidebarOptionProps) => {
+const SidebarOption: React.FC<SidebarOptionProps> = ({ Icon, title }) => {
     return (
         <div className="sidebarOption">
             {Icon && <Icon className="sidebarOption_icon" />}
@@ -15,9 +15,7 @@ const SidebarOption: React.FC<SidebarOptionProps> = ({ Icon, title }: SidebarOpt
                     <h3>{title}</h3>
                 ) : (
                     <h3 className='sidebarOption_channel'>
-                        <span className='sidebarOption_hash'>
-                            #{title}
-                        </span>
+                        <span className='sidebarOption_hash'>#</span>{title}
                     </h3>
                 )
             }
