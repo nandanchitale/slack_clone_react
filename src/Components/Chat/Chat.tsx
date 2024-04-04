@@ -4,29 +4,23 @@ import { InfoOutlined, StarBorderOutlined } from '@mui/icons-material';
 import "./css/chat.css";
 import { collection, doc, getDocs, onSnapshot, orderBy, query, Timestamp } from 'firebase/firestore';
 import { db } from '../../Firebase/firebase';
-import Message from "./Message";
 import { RoomMessage } from '../../Models/RoomMessage';
+import Messages from './Messages';
 
 function Chat() {
 
     const { roomId } = useParams();
 
     const [roomDetails, setRoomDetails] = useState<any>(null);
-    const [roomMessages, setRoomMessages] = useState<RoomMessage[]>();
+    const [roomMessages, setRoomMessages] = useState<RoomMessage[]>([]);
 
     useEffect(() => {
         if (roomId) {
 
-            const roomData = async () => {
+            onSnapshot(doc(db, "rooms", roomId), (doc) => {
+                setRoomDetails(doc.data());
+            });
 
-                onSnapshot(doc(db, "rooms", roomId), (doc) => {
-                    setRoomDetails(doc.data());
-                });
-
-                // onSnapshot(doc(db, "rooms", roomId, "messages"), (doc) => {
-                //     setRoomMessages(doc.data());
-                // });
-            }
 
             const roomMessageData = async () => {
 
@@ -40,7 +34,7 @@ function Chat() {
                     chatRoomMessages.push({
                         id: doc.id,
                         message: doc.data().message,
-                        timestamp: doc.data().timestamp(),
+                        timestamp: doc.data().timestamp,
                         user: doc.data().user,
                         userImage: doc.data().userImage
                     });
@@ -48,7 +42,6 @@ function Chat() {
                 setRoomMessages(chatRoomMessages);
             }
 
-            roomData();
             roomMessageData();
         }
 
@@ -73,18 +66,17 @@ function Chat() {
                         <InfoOutlined /> Details
                     </p>
                 </div>
-                <div className="chat_messages">
-                    {roomMessages.map(roomMessage => {
-                        <Message
-                            id={roomMessage.id}
-                            key={roomMessage.id}
-                            message={roomMessage.message}
-                            user={roomMessage.user}
-                            userImage={roomMessage.userImage}
-                        />
-                    });
-                    }
-                </div>
+            </div>
+            <div className="chat_messages">
+                {roomMessages.map(({ id, message, user, userImage, timestamp }) => (
+                    <Messages
+                        key={id}
+                        message={message}
+                        timestamp={timestamp}
+                        user={user}
+                        userImage={userImage}
+                    />
+                ))}
             </div>
         </div>
     )
