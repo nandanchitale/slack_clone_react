@@ -14,11 +14,14 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import AddIcon from '@mui/icons-material/Add';
 import { db } from '../../Firebase/firebase';
 import { collection, onSnapshot, query } from "@firebase/firestore";
-import { Room } from '../../Models/Room';
+import { Room } from '../../Types/Room';
+import { useStateValue } from '../../core/StateProvider';
 
 function Sidebar() {
 
     const [channels, setChannels] = useState<Room[]>([]);
+
+    const [{ user }] = useStateValue();
 
     /**This code is used when you are not using realtime database from firebase */
     // useEffect(() => {
@@ -79,7 +82,7 @@ function Sidebar() {
                     <h2>Workspace Name</h2>
                     <h3>
                         <FiberManualRecordIcon />
-                        Nandan Chitale
+                        {user?.displayName}
                     </h3>
                 </div>
                 <CreateIcon />

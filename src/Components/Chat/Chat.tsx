@@ -4,7 +4,7 @@ import { InfoOutlined, StarBorderOutlined } from '@mui/icons-material';
 import "./css/chat.css";
 import { collection, doc, getDocs, onSnapshot, orderBy, query, Timestamp } from 'firebase/firestore';
 import { db } from '../../Firebase/firebase';
-import { RoomMessage } from '../../Models/RoomMessage';
+import { RoomMessage } from '../../Types/RoomMessage';
 import Messages from './Messages';
 
 function Chat() {

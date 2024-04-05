@@ -1,5 +1,5 @@
 import React from 'react'
-import { RoomMessage } from '../../Models/RoomMessage';
+import { RoomMessage } from '../../Types/RoomMessage';
 import './css/message.css'
 
 const ChatRoomMessage: React.FC<RoomMessage> = ({ timestamp, user, userImage, message }) => {
