@@ -3,7 +3,7 @@ import { RoomMessage } from '../../Types/RoomMessage';
 import './css/message.css'
 
 const ChatRoomMessage: React.FC<RoomMessage> = ({ timestamp, user, userImage, message }) => {
-    console.log(typeof (timestamp));
+
     return (
         <div className='message'>
             <img src={`${userImage}`} alt={user} />

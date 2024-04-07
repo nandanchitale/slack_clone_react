@@ -2,7 +2,7 @@ import React from 'react'
 import "./css/SidebarOption.css";
 import { useNavigate } from "react-router-dom";
 import { db } from '../../Firebase/firebase';
-import { addDoc, collection, doc, setDoc } from "@firebase/firestore";
+import { addDoc, collection } from "@firebase/firestore";
 
 
 interface SidebarOptionProps {
